@@ -24,8 +24,13 @@
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title"
-        >Welcome {{ request.user.first_name }}!</span
-      >
+        >
+        {% if request.user.is_authenticated %}
+        Welcome {{ request.user.first_name }}!
+        {% else %}
+          Welcome! Please log in.
+        {% endif %}
+      </span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer">Chatroom</div>
       <!-- Navigation. We hide it in small screens. -->
