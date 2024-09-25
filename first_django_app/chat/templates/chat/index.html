@@ -12,6 +12,10 @@
     .page-content {
         padding: 100px;
     }
+
+    .color-gray {
+      color: rgba(0, 0, 0, 0.4);
+    }
 </style>
 
 <!-- Always shows a header, even in smaller screens. -->
@@ -46,6 +50,12 @@
     <div class="page-content">
       <!-- Accent-colored raised button with ripple -->
       <!-- Textfield with Floating Label -->
+
+      {% for message in messages %}
+      <div>
+        <span class="color-gray">[{{ message.created_at }}]</span> {{ message.author }}: {{ message.text }}
+      </div>
+      {% endfor %}
 
       <form action="/chat/" method="post">
         {% csrf_token %}
