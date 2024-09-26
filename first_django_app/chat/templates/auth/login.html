@@ -4,8 +4,9 @@
     <p>Benutzername oder Passwort ist falsch</p>
 {% endif %}
 
-<form action="/login/" method="post">
+<form action="/login/" method="POST">
     {% csrf_token %}
+    <input type="hidden" name="redirect" value="{{ redirect }}">
     <div><input name="username" type="text"></div>
     <div><input name="password" type="text"></div>
     <div><button>Login</button></div>
