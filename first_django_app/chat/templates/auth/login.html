@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>Login</h1>
+<h2>Login</h2>
 
 {% if wrongPassword %}
-<p>Benutzername oder Passwort ist falsch</p>
+<p>Der Benutzername oder Passwort ist falsch</p>
 {% endif %}
 
 {% comment %} <form action="/login/" method="POST">
@@ -19,11 +19,11 @@
   <input type="hidden" name="redirect" value="{{ redirect }}" />
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input name="username" class="mdl-textfield__input" type="text" id="sample3" />
-    <label class="mdl-textfield__label" for="sample3">Text...</label>
+    <label class="mdl-textfield__label" for="sample3">Username</label>
   </div>
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input name="password" class="mdl-textfield__input" type="text" id="sample4" />
-    <label class="mdl-textfield__label" for="sample4">Text...</label>
+    <label class="mdl-textfield__label" for="sample4">Password</label>
   </div>
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
     Login
