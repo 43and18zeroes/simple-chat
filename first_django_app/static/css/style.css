@@ -1,7 +1,16 @@
+.color-gray {
+  color: rgba(0, 0, 0, 0.4);
+}
+
 .page-content {
   padding: 100px;
 }
 
-.color-gray {
-  color: rgba(0, 0, 0, 0.4);
+#login_form {
+  display: flex;
+  flex-direction: column;
+  
+  button {
+    width: fit-content;
+  }
 }
