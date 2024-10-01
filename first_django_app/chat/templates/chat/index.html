@@ -1,22 +1,37 @@
-{% extends "base.html" %}
-{% block content %}
-
-{% if request.user.is_authenticated %} {% for message in messages %}
+{% extends "base.html" %} {% block content %} {% if request.user.is_authenticated %} {% for message in messages %}
 <div>
   <span class="color-gray">[{{ message.created_at }}]</span> {{ message.author}}: {{ message.text }}
 </div>
 {% endfor %}
 
-<form action="/chat/" method="post">
+<script>
+  async function sendMessage() {
+    let fd = new FormData();
+    let token = '{{ csrf_token }}'
+    fd.append("textmessage", messageField.value);
+    fd.append("csrfmiddlewaretoken", token);
+    try {
+      await fetch("/chat/", {
+        method: "POST",
+        body: fd,
+      });
+      console.log('Success');
+    } catch (e) {
+      console.log('Error', e);
+    }
+  }
+</script>
+
+<form onsubmit="sendMessage(); return false;" method="post">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input
       class="mdl-textfield__input"
       name="textmessage"
       type="text"
-      id="sample3"
+      id="messageField"
     />
-    <label class="mdl-textfield__label" for="sample3">Text...</label>
+    <label class="mdl-textfield__label" for="messageField">Text...</label>
   </div>
   <button
     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
@@ -31,5 +46,4 @@
   <a href="/login/">hier</a> klicken.
 </p>
 {% endif %}
-
 {% endblock %}
