@@ -6,7 +6,7 @@
   padding: 100px;
 }
 
-#login_form {
+.auth_form {
   display: flex;
   flex-direction: column;
   
