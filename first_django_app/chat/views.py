@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Chat, Message
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 # Create your views here.
@@ -41,10 +42,25 @@ def login_view(request):
 
 
 def register_view(request):
-    # if request.method == "POST":
-        # user = User.objects.create_user(
-        #     username="john", email="jlennon@beatles.com", password="glass onion"
-        # )
-    # print("link")
-    # print(user)
+    if request.method == "POST":
+        username = request.POST.get("reg_username")
+        password = request.POST.get("reg_password")
+
+        if not username:
+            messages.error(request, "The username field is required.")
+            return render(request, "auth/register.html")
+
+        if not password:
+            messages.error(request, "The password field is required.")
+            return render(request, "auth/register.html")
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists. Please choose a different one.")
+            return render(request, "auth/register.html")
+
+        user = User.objects.create_user(username=username, password=password)
+        messages.success(request, "Registration successful. You can now log in.")
+        print(user)
+        # return HttpResponseRedirect("/login/")
+
     return render(request, "auth/register.html")
