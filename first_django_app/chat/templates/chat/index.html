@@ -2,11 +2,12 @@
 
 <div id="messageContainer">
   {% for message in messages %}
-<div>
-  <span class="color-gray">[{{ message.created_at }}]</span> {{ message.author}}: {{ message.text }}
+  <div>
+    <span class="color-gray">[{{ message.created_at }}]</span> {{ message.author}}: {{ message.text }}
+  </div>
+  {% endfor %}
 </div>
-{% endfor %}
-</div>
+<div></div>
 
 <script>
   function getDate() {
@@ -51,17 +52,10 @@
 <form onsubmit="sendMessage(); return false;" method="post">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input
-      class="mdl-textfield__input"
-      name="textmessage"
-      type="text"
-      id="messageField"
-    />
+    <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
     <label class="mdl-textfield__label" for="messageField">Text...</label>
   </div>
-  <button
-    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-  >
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
     Send
   </button>
 </form>
