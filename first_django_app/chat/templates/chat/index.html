@@ -26,10 +26,10 @@
       });
       document.getElementById('deleteMessage').remove();
       messageContainer.innerHTML += `
-      <div id="deleteMessage">
-        <span class="color-gray">[DATUM]</span> <span>{{ request.user.first_name }}: ${messageField.value}</span>
-      </div>
-    `;
+        <div id="deleteMessage">
+          <span class="color-gray">[DATUM]</span> <span>{{ request.user.first_name }}: ${messageField.value}</span>
+        </div>
+      `;
       console.log('Success');
     } catch (e) {
       console.log('Error', e);
