@@ -20,7 +20,8 @@ def index(request):
             receiver=request.user,
         )
     chatMessages = Message.objects.filter(chat__id=1)
-    return render(request, "chat/index.html", {"messages": chatMessages})
+    lastMessage = chatMessages.last()
+    return render(request, "chat/index.html", {"messages": chatMessages, "last_message": lastMessage})
 
 
 def login_view(request):
