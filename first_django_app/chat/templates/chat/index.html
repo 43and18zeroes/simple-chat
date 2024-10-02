@@ -9,27 +9,38 @@
 </div>
 
 <script>
+  function getDate() {
+    const today = new Date();
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    let formattedDate = today.toLocaleDateString('en-US', options);
+    const parts = formattedDate.split(' ');
+    parts[0] += '.';
+    formattedDate = parts.join(' ');
+    return formattedDate;
+  }
+
   async function sendMessage() {
     let fd = new FormData();
     let token = '{{ csrf_token }}'
     fd.append("textmessage", messageField.value);
     fd.append("csrfmiddlewaretoken", token);
     try {
+      const today = getDate();
       messageContainer.innerHTML += `
         <div id="deleteMessage">
-          <span class="color-gray">[DATUM]</span> <span class="color-gray">{{ request.user.first_name }}: ${messageField.value}</span>
+          <span class="color-gray">[${today}]</span> <span class="color-gray">{{ request.user.first_name }}: ${messageField.value}</span>
         </div>
       `;
       await fetch("/chat/", {
         method: "POST",
         body: fd,
       });
-      document.getElementById('deleteMessage').remove();
+      {% comment %} document.getElementById('deleteMessage').remove();
       messageContainer.innerHTML += `
         <div id="deleteMessage">
           <span class="color-gray">[DATUM]</span> <span>{{ request.user.first_name }}: ${messageField.value}</span>
         </div>
-      `;
+      `; {% endcomment %}
       console.log('Success');
     } catch (e) {
       console.log('Error', e);
