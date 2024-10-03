@@ -32,16 +32,24 @@
           <span class="color-gray">[${today}]</span> <span class="color-gray">{{ request.user.first_name }}: ${messageField.value}</span>
         </div>
       `;
-      await fetch("/chat/", {
+
+      let response = await fetch("/chat/", {
         method: "POST",
         body: fd,
       });
+
+      let json = await response.json();
+      console.log(json);
+      const parsedjson = JSON.parse(json);
+      console.log(parsedjson.fields.text);
+      
       document.getElementById("deleteMessage").remove();
       messageContainer.innerHTML += `
         <div>
-          <span class="color-gray">[{{ last_message.created_at }}]</span> <span>{{ request.user.first_name }}: ${messageField.value}</span>
+          <span class="color-gray">[{{ last_message.created_at }}]</span> <span>{{ request.user.first_name }}: ${parsedjson.fields.text}</span>
         </div>
       `;
+
       messageField.value = "";
       console.log("Success");
     } catch (e) {

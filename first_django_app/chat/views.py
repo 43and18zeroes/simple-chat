@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect
 from .models import Chat, Message
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from django.http import JsonResponse
+from django.core import serializers
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -13,12 +14,14 @@ def index(request):
     if request.method == "POST":
         print("Received data " + request.POST["textmessage"])
         myChat = Chat.objects.get(id=1)
-        Message.objects.create(
+        new_message = Message.objects.create(
             text=request.POST["textmessage"],
             chat=myChat,
             author=request.user,
             receiver=request.user,
         )
+        serialized_obj = serializers.serialize('json', [ new_message ])
+        return JsonResponse(serialized_obj[1:-1], safe=False)
     chatMessages = Message.objects.filter(chat__id=1)
     lastMessage = chatMessages.last()
     return render(request, "chat/index.html", {"messages": chatMessages, "last_message": lastMessage})
