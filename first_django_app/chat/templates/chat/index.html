@@ -42,6 +42,7 @@
           <span class="color-gray">[{{ last_message.created_at }}]</span> <span>{{ request.user.first_name }}: ${messageField.value}</span>
         </div>
       `;
+      messageField.value = "";
       console.log("Success");
     } catch (e) {
       console.log("Error", e);
