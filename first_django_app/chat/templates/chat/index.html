@@ -3,8 +3,8 @@
 <div id="messageContainer">
   {% for message in messages %}
   <div>
-    <span class="color-gray">[{{ message.created_at }}]</span> {{
-    message.author}}: {{ message.text }}
+    <span class="color-gray">[{{ message.created_at }}]</span>
+    {{message.author}}: {{ message.text }}
   </div>
   {% endfor %}
 </div>
@@ -38,7 +38,7 @@
       });
       document.getElementById("deleteMessage").remove();
       messageContainer.innerHTML += `
-        <div id="deleteMessage">
+        <div>
           <span class="color-gray">[{{ last_message.created_at }}]</span> <span>{{ request.user.first_name }}: ${messageField.value}</span>
         </div>
       `;
