@@ -39,14 +39,12 @@
       });
 
       let json = await response.json();
-      console.log(json);
-      const parsedjson = JSON.parse(json);
-      console.log(parsedjson);
+      const parsedMessage = JSON.parse(json);
       
       document.getElementById("deleteMessage").remove();
       messageContainer.innerHTML += `
         <div>
-          <span class="color-gray">[{{ last_message.created_at }}]</span> <span>{{ request.user.first_name }}: ${parsedjson.fields.text}</span>
+          <span class="color-gray">[{{ last_message.created_at }}]</span> <span>{{ request.user.first_name }}: ${parsedMessage.fields.text}</span>
         </div>
       `;
 
