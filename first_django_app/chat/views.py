@@ -11,6 +11,9 @@ from django.core import serializers
 # Create your views here.
 @login_required(login_url="/login/")
 def index(request):
+    """
+    This is a view to render the chat html.
+    """
     if request.method == "POST":
         print("Received data " + request.POST["textmessage"])
         myChat = Chat.objects.get(id=1)
